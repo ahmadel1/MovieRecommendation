@@ -17,4 +17,9 @@ public class User {
     public String getUserName(){
         return this.userName;
     }
+
+    @Override
+    public String toString() {
+        return "User: " + userName + ", ID: " + userId + ", movieIds: " + movieIds + "\n";
+    }
 }
