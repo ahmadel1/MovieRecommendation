@@ -11,13 +11,10 @@ import java.util.List;
 
 public class UserParser {
     private List<User> users;
-    private String error;
+    private String error = null;
 
     public UserParser(String userFile) {
         users = new ArrayList<>();
-        parseUserFile(userFile);
-        System.out.println("UserParser initialized with file: " + userFile);
-
 
         try
         {
@@ -53,11 +50,11 @@ public class UserParser {
 
     }
 
-    private void parseUserFile(String userFile){
-        System.out.println("Parsing user file...");
-    }
-
     public List<User> getUsers() {
         return users;
+    }
+
+    public Boolean success() {
+        return error == null;
     }
 }

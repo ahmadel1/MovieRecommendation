@@ -22,4 +22,8 @@ public class MovieParser {
     public List<Movie> getMovies() {
         return movies;
     }
+
+    public Boolean success() {
+        return error == null;
+    }
 }
