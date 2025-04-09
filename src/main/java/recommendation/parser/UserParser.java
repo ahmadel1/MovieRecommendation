@@ -23,14 +23,25 @@ public class UserParser {
 
             String firstLine;
             
+            // TODO: check against missing lines, empty lines
+
             // reading the file, 2 lines by 2 lines
             while((firstLine = bufread.readLine()) != null) {
                 var firstLineParts = firstLine.split(", ");
                 var uname = firstLineParts[0];
                 var uid = firstLineParts[1];
 
+                // TODO: check if both exist
+
+                // TODO: validate user name
+                // TODO: validate user ID
+
                 var secondLine = bufread.readLine();
                 var movieIds = List.of(secondLine.split(", "));
+
+                // TODO: validate movie IDs
+                // TODO: validate movies exist
+                // TODO: validate user IDs are not repeated, and in movies, movie IDs are not repeated
 
                 var user = new User(uname, uid, movieIds);
                 users.add(user);
@@ -56,5 +67,9 @@ public class UserParser {
 
     public Boolean success() {
         return error == null;
+    }
+
+    public String getError() {
+        return error;
     }
 }

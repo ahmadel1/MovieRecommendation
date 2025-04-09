@@ -26,4 +26,8 @@ public class MovieParser {
     public Boolean success() {
         return error == null;
     }
+
+    public String getError() {
+        return error;
+    }
 }
