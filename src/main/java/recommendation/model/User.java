@@ -4,10 +4,10 @@ import java.util.List;
 
 public class User {
     private String userName;
-    private int userId;
-    private List<Integer> movieIds;
+    private String userId;
+    private List<String> movieIds;
 
-    public User(String userName, int userId, List<Integer> movieIds) {
+    public User(String userName, String userId, List<String> movieIds) {
         this.userName = userName;
         this.userId = userId;
         this.movieIds = movieIds;
