@@ -15,12 +15,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("Movie Recommendation System starting...");
 
-        String userFile = "users.txt";
+        String userFile = "samples/users.txt";
         UserParser userParser = new UserParser(userFile);
         List<User> users = userParser.getUsers();
         System.out.println("Successfully loaded " + users.size() + " users");
 
-        String movieFile = "movies.txt";
+        String movieFile = "samples/movies.txt";
         MovieParser movieParser = new MovieParser(movieFile);
         List<Movie> movies = movieParser.getMovies();
         System.out.println("Successfully loaded " + movies.size() + " movies");
