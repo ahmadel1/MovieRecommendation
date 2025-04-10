@@ -41,7 +41,7 @@ public class UserParser {
 
                 // TODO: validate movie IDs
                 // TODO: validate movies exist
-                // TODO: validate user IDs are not repeated, and in movies, movie IDs are not repeated
+                // TODO: validate user IDs are not repeated
 
                 var user = new User(uname, uid, movieIds);
                 users.add(user);

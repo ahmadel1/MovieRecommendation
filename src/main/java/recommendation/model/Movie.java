@@ -13,4 +13,9 @@ public class Movie {
         this.movieGenres = movieGenres;
         System.out.println("Created Movie: " + movieTitle);
     }
+
+    @Override
+    public String toString() {
+        return "Movie: " + movieTitle + ", ID: " + movieId + ", genres: " + movieGenres + "\n";
+    }
 }
