@@ -14,16 +14,16 @@ public class Movie {
         System.out.println("Created Movie: " + movieTitle);
     }
 
+    public String getMovieTitle() {
+        return movieTitle;
+    }
+
     public String getMovieId() {
         return movieId;
     }
 
     public List<String> getMovieGenres() {
         return movieGenres;
-    }
-
-    public String getMovieTitle() {
-        return movieTitle;
     }
 
     @Override
