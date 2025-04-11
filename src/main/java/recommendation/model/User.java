@@ -18,6 +18,14 @@ public class User {
         return this.userName;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public List<String> getMovieIds(){
+        return this.movieIds;
+    }
+
     @Override
     public String toString() {
         return "User: " + userName + ", ID: " + userId + ", movieIds: " + movieIds + "\n";
