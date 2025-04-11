@@ -11,4 +11,12 @@ public class SingleRecommendation {
         this.movies = movies;
         System.out.println("Created recommendation for user: " + user.getUserName());
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
 }
