@@ -17,6 +17,14 @@ public class User {
     public String getUserName(){
         return this.userName;
     }
+    
+    public String getUserId() {
+        return userId;
+    }
+    
+    public List<String> getMovieIds() {
+        return movieIds;
+    }
 
     public String getUserId() {
         return userId;
