@@ -1,13 +1,16 @@
 package recommendation.parser;
 
 import recommendation.model.Movie;
+import recommendation.model.User;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MovieParser {
     private List<Movie> movies;
@@ -70,5 +73,15 @@ public class MovieParser {
 
     public String getError() {
         return error;
+    }
+    public void movieIdUniquenessValidation() throws ValidationException{
+        Set<String> uniqueMovieIds = new HashSet<>();
+        for(int i=0;i<movies.size();i++){
+            String numberInMovieId = movies.get(i).getMovieId().substring(movies.get(i).getMovieId().length()-3);
+            System.out.println("id: "+numberInMovieId);
+            if(!uniqueMovieIds.add(numberInMovieId)){
+                throw new ValidationException("ERROR: Movie Id numbers {"+numberInMovieId+"} aren’t unique");
+            }
+        }
     }
 }

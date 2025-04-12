@@ -7,7 +7,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UserParser {
     private List<User> users;
@@ -71,5 +73,14 @@ public class UserParser {
 
     public String getError() {
         return error;
+    }
+
+    public void userIdUniquenessValidation() throws ValidationException{
+        Set<String> uniqueUserIds = new HashSet<>();
+        for(int i=0;i<users.size();i++){
+            if(!uniqueUserIds.add(users.get(i).getUserId())){
+                throw new ValidationException("ERROR: User Id {"+users.get(i).getUserId()+"} is wrong");
+            }
+        }
     }
 }
