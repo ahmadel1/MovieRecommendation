@@ -206,8 +206,8 @@ public class ValidationTest {
     public void validateCorrectMovieIdUniqueness() {
         List<Movie> movies= new ArrayList<>();
         movies.add(0,new Movie("Title Of Xe","TOX121",new ArrayList<String>(){{add("drama");add("action");}}));
-        movies.add(0,new Movie("Title Of Xe","TOX122",new ArrayList<String>(){{add("drama");add("action");}}));
-        movies.add(0,new Movie("Title Of Xe","TOX123",new ArrayList<String>(){{add("drama");add("action");}}));
+        movies.add(1,new Movie("Title Of Xe","TOX122",new ArrayList<String>(){{add("drama");add("action");}}));
+        movies.add(2,new Movie("Title Of Xe","TOX123",new ArrayList<String>(){{add("drama");add("action");}}));
         try{
             Validation.movieIdUniquenessValidation(movies);
         }
@@ -222,8 +222,9 @@ public class ValidationTest {
     public void validateInCorrectMovieIdUniqueness() {
         List<Movie> movies= new ArrayList<>();
         movies.add(0,new Movie("Title Of Xe","TOX121",new ArrayList<String>(){{add("drama");add("action");}}));
-        movies.add(0,new Movie("Title Of Xe","TOX121",new ArrayList<String>(){{add("drama");add("action");}}));
-        movies.add(0,new Movie("Title Of Xe","TOX123",new ArrayList<String>(){{add("drama");add("action");}}));
+        movies.add(1,new Movie("Title Of Xe","TOX121",new ArrayList<String>(){{add("drama");add("action");}}));
+        movies.add(2,new Movie("Title Of Xe","TOX123",new ArrayList<String>(){{add("drama");add("action");}}));
+
 
         ValidationException validationException = assertThrows(ValidationException.class,() -> {
             Validation.movieIdUniquenessValidation(movies);
