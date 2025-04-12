@@ -66,7 +66,7 @@ public class Validation {
         Set<String> uniqueUserIds = new HashSet<>();
         for(int i=0;i<users.size();i++){
             if(!uniqueUserIds.add(users.get(i).getUserId())){
-                throw new ValidationException("ERROR: User Id {"+users.get(i).getUserId()+"} is wrong");
+                throw new ValidationException("ERROR: User Id {"+users.get(i).getUserId()+"} is repeated");
             }
         }
     }
@@ -75,7 +75,7 @@ public class Validation {
         for(int i=0;i<movies.size();i++){
             String numberInMovieId = movies.get(i).getMovieId().substring(movies.get(i).getMovieId().length()-3);
             if(!uniqueMovieIds.add(numberInMovieId)){
-                throw new ValidationException("ERROR: Movie Id numbers {"+numberInMovieId+"} aren’t unique");
+                throw new ValidationException("ERROR: Movie Id numbers {"+numberInMovieId+"} are repeated");
             }
         }
     }
