@@ -5,6 +5,7 @@ import recommendation.model.SingleRecommendation;
 import recommendation.model.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -15,8 +16,8 @@ public class RecommendationSystem {
 
     public RecommendationSystem(List<User> users, List<Movie> movies) {
         singleRecommendations = new ArrayList<>();
-        this.movies = movies;
-        this.users = users;
+        this.users = users != null ? users : new ArrayList<>();
+        this.movies = movies != null ? movies : new ArrayList<>();
         generateRecommendations();
         System.out.println("RecommendationSystem initialized");
     }
