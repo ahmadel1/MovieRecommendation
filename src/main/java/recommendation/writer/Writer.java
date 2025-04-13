@@ -45,8 +45,16 @@ public class Writer {
         }catch (IOException e){
             e.printStackTrace();
         }
-        recommendations.forEach(recommendation -> {
+    }
 
-        });
+    public void writeError(String error) throws IOException {
+        FileWriter writer = new FileWriter("samples/errors.txt");
+        System.out.println("Writing errors file.");
+        try {
+            writer.write(error);
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
