@@ -20,7 +20,7 @@ public class Validation {
         }
         throw new ValidationException("ERROR: Movie Title {"+movieTitle+"} is wrong");
     }
-    static public void movieIdValidation(String movieTitle,String movieId) throws ValidationException{
+    static public void movieIdValidation(String movieId, String movieTitle) throws ValidationException{
         String[] wordsInMovieTitle=movieTitle.split(" ");
         String firstLetterInEachMovieTitleWord="";
         for(int i=0; i<wordsInMovieTitle.length; i++){
@@ -60,6 +60,21 @@ public class Validation {
             return;
         }
         throw new ValidationException("ERROR: User Id {"+userId+"} is wrong");
+    }
+
+    static public void movieGenresValidation(List<String> movieGenres, String movieId) throws ValidationException{
+        if (movieGenres.size() == 0) {
+            throw new ValidationException("ERROR: Movie Genres for {"+movieId+"} are empty");
+        }
+
+        for (int i = 0; i < movieGenres.size(); i++) {
+            if (movieGenres.get(i).isEmpty()) {
+                throw new ValidationException("ERROR: A Movie Genre for {"+movieId+"} is empty");
+            }
+            if (!movieGenres.get(i).matches("^[A-Za-z][A-Za-z\\s]+$")) {
+                throw new ValidationException("ERROR: Movie Genre {"+movieGenres.get(i)+"} is wrong");
+            }
+        }
     }
 
     static public void userIdUniquenessValidation(List<User> users) throws ValidationException{

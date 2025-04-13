@@ -1,5 +1,6 @@
 package recommendation.parser;
 
+import recommendation.model.Movie;
 import recommendation.model.User;
 
 import java.io.BufferedReader;
@@ -15,7 +16,14 @@ public class UserParser {
     private List<User> users;
     private String error = null;
 
-    public UserParser(String userFile) {
+    public UserParser(String userFile, List<Movie> movies) {
+        if (userFile == null) {
+            throw new IllegalArgumentException("File path cannot be null");
+        }
+        if (movies == null) {
+            throw new IllegalArgumentException("Movies list cannot be null");
+        }
+
         users = new ArrayList<>();
 
         try
@@ -33,24 +41,59 @@ public class UserParser {
                 var uname = firstLineParts[0];
                 var uid = firstLineParts[1];
 
-                // TODO: check if both exist
+                Validation.userNameValidation(uname);
 
-                // TODO: validate user name
-                // TODO: validate user ID
+                Validation.userIdValidation(uid);
 
                 var secondLine = bufread.readLine();
-                var movieIds = List.of(secondLine.split(", "));
+                var parsedMovieIds = List.of(secondLine.split(", "));
 
-                // TODO: validate movie IDs
-                // TODO: validate movies exist
-                // TODO: validate user IDs are not repeated
+                if (parsedMovieIds.size() == 0) {
+                    throw new ValidationException("ERROR: Movie Ids for {"+uid+"} are wrong");
+                }
+                // Use a HashSet to automatically remove duplicates
+                var movieIds = new ArrayList<String>();
+                var uniqueMovieIds = new HashSet<String>();
+                // remove spaces in the beginning and end of each movie ID
+                // and ensure uniqueness
+                for (int i = 0; i < parsedMovieIds.size(); i++) {
+                    String movieId = parsedMovieIds.get(i).trim();
+                    if (uniqueMovieIds.add(movieId)) {
+                        movieIds.add(movieId);
+                    }
+                }
 
+                // validate movies exist
+                for (String movieId : movieIds) {
+                    boolean exists = movies.stream().anyMatch(movie -> movie.getMovieId().equals(movieId));
+                    if (!exists) {
+                        throw new ValidationException("ERROR: Movie Id {"+movieId+"} does not exist");
+                    }
+                }
+                
+                
                 var user = new User(uname, uid, movieIds);
                 users.add(user);
             }
             
             bufread.close();
+            Validation.userIdUniquenessValidation(users);
             System.out.println("Loaded users: " + users.toString());
+        } catch(ValidationException e) {
+            System.out.println("Validation: " +e);
+            error = e.getMessage();
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Exception: " +e);
+            error = "Users file is not formatted correctly";
+        }
+        catch(NullPointerException e) {
+            System.out.println("Exception: " +e);
+            error = "Users file is not formatted correctly";
+        } 
+        catch(IllegalArgumentException e) {
+            System.out.println("Exception: " +e);
+            error = "Users file is not formatted correctly";
         } catch(FileNotFoundException e) {
             System.out.println("Exception: " +e);
             error = "Users file not found";

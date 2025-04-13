@@ -19,6 +19,10 @@ public class MovieParser {
     public MovieParser(String movieFile) {
         movies = new ArrayList<>();
 
+        if (movieFile == null) {
+            throw new IllegalArgumentException("File path cannot be null");
+        }
+
         try
         {
             FileReader fileReader = new FileReader(movieFile);
@@ -34,23 +38,53 @@ public class MovieParser {
                 var mtitle = firstLineParts[0];
                 var mid = firstLineParts[1];
 
-                // TODO: check if both exist
+                Validation.movieTitleValidation(mtitle);
 
-                // TODO: validate movie name
-                // TODO: validate movie ID
+                Validation.movieIdValidation(mid, mtitle);
 
                 var secondLine = bufread.readLine();
-                var movieGenres = List.of(secondLine.split(", "));
+                var parsedGenres = List.of(secondLine.split(", "));
 
-                // TODO: validate movie genres
-                // TODO: validate movie IDs are not repeated
-
+                // Use a HashSet to automatically remove duplicates
+                var movieGenres = new ArrayList<String>();
+                var uniqueGenres = new HashSet<String>();
+                
+                // remove spaces in the beginning and end of each genre
+                // and ensure uniqueness
+                for (int i = 0; i < parsedGenres.size(); i++) {
+                    String genre = parsedGenres.get(i).trim();
+                    if (uniqueGenres.add(genre)) {
+                        movieGenres.add(genre);
+                    }
+                }
+                
+                Validation.movieGenresValidation(movieGenres, mid);
+                
+                
                 var movie = new Movie(mtitle, mid, movieGenres);
                 movies.add(movie);
             }
             
+            Validation.movieIdUniquenessValidation(movies);
+            
             bufread.close();
             System.out.println("Loaded movies: " + movies.toString());
+        
+        } catch(ValidationException e) {
+            System.out.println("Validation: " +e);
+            error = e.getMessage();
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Exception: " +e);
+            error = "Movies file is not formatted correctly";
+        }
+        catch(NullPointerException e) {
+            System.out.println("Exception: " +e);
+            error = "Movies file is not formatted correctly";
+        } 
+        catch(IllegalArgumentException e) {
+            System.out.println("Exception: " +e);
+            error = "Movies file is not formatted correctly";
         } catch(FileNotFoundException e) {
             System.out.println("Exception: " +e);
             error = "Movies file not found";

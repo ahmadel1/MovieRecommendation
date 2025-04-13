@@ -21,7 +21,7 @@ public class Main {
         System.out.println("Successfully loaded " + movies.size() + " movies");
 
         String userFile = "samples/users.txt";
-        UserParser userParser = new UserParser(userFile);
+        UserParser userParser = new UserParser(userFile, movies);
         List<User> users = userParser.getUsers();
         System.out.println("Successfully loaded " + users.size() + " users");
 

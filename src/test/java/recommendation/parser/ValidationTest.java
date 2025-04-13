@@ -56,7 +56,7 @@ public class ValidationTest {
         String movieTitle = "The Shawshank Redemption";
         String movieId = "TSR001";
         try{
-            Validation.movieIdValidation(movieTitle,movieId);
+            Validation.movieIdValidation(movieId,movieTitle);
         }
         catch (ValidationException e){
             fail("ValidationException should not be thrown for movie id:"+movieId);
@@ -70,7 +70,7 @@ public class ValidationTest {
         String movieTitle = "The Shawshank Redemption";
         String movieId = "TWR001";
         ValidationException validationException = assertThrows(ValidationException.class,() -> {
-            Validation.movieIdValidation(movieTitle,movieId);
+            Validation.movieIdValidation(movieId,movieTitle);
         });
         assertEquals("ERROR: Movie Id letters {"+movieId+"} are wrong",validationException.getMessage());
     }
@@ -82,7 +82,7 @@ public class ValidationTest {
         String movieTitle = "The God Father";
         String movieId = "TGF02";
         ValidationException validationException = assertThrows(ValidationException.class,() -> {
-            Validation.movieIdValidation(movieTitle,movieId);
+            Validation.movieIdValidation(movieId,movieTitle);
         });
         assertEquals("ERROR: Movie Id letters {"+movieId+"} are wrong",validationException.getMessage());
     }
@@ -94,7 +94,7 @@ public class ValidationTest {
         String movieTitle = "The God Father";
         String movieId = "TGF#002";
         ValidationException validationException = assertThrows(ValidationException.class,() -> {
-            Validation.movieIdValidation(movieTitle,movieId);
+            Validation.movieIdValidation(movieId,movieTitle);
         });
         assertEquals("ERROR: Movie Id letters {"+movieId+"} are wrong",validationException.getMessage());
     }
