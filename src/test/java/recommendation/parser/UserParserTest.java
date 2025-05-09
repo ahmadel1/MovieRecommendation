@@ -32,11 +32,21 @@ public class UserParserTest {
         assertEquals(2, users.size(), "2 users parsed");
     }
 
-    // input is null
+    // userFile  is null
     @Tag("unit-test")
     @Test
-    public void parseNullParameter() {
+    public void parseNullUserFile() {
         String filePath = null;
+        assertThrows(IllegalArgumentException.class, () -> {
+            new UserParser(filePath, movies);
+        }, "Throw Illegal Argument Exception");
+    }
+    // movies  are null
+    @Tag("unit-test")
+    @Test
+    public void parseNullMovies() {
+        var filePath = "src/test/resources/users/valid_users.txt";
+        List<Movie> movies = null;
         assertThrows(IllegalArgumentException.class, () -> {
             new UserParser(filePath, movies);
         }, "Throw Illegal Argument Exception");
@@ -127,7 +137,7 @@ public class UserParserTest {
                     parser1.getError(),
                     "Should have specific error message for invalid user ID format");
         assertFalse(parser1.success(), "Parser should not be successful");
-        
+
         // Test case 2: Too short user ID
         String filePath2 = "src/test/resources/users/invalid_user_id_too_short.txt";
         String invalidUserId2 = "1234X";
@@ -136,13 +146,13 @@ public class UserParserTest {
                     parser2.getError(),
                     "Should have specific error message for too short user ID");
         assertFalse(parser2.success(), "Parser should not be successful");
-        
+
         // Test case 3: Empty user ID
         String filePath3 = "src/test/resources/users/invalid_user_id_empty.txt";
         String emptyUserId = "";
         var parser3 = new UserParser(filePath3, movies);
         assertNotNull(parser3.getError(), "Should have error for empty user ID");
-        assertTrue(parser3.getError().contains(emptyUserId) || 
+        assertTrue(parser3.getError().contains(emptyUserId) ||
                   parser3.getError().startsWith("ERROR: User Id"),
                   "Error message should relate to empty user ID");
         assertFalse(parser3.success(), "Parser should not be successful");
@@ -164,6 +174,7 @@ public class UserParserTest {
     public void parseEmptySecondLine() {
         String filePath = "src/test/resources/users/empty_second_line.txt";
         var parser = new UserParser(filePath, movies);
+        System.out.println("here: "+parser.getError());
         assertNotNull(parser.getError(), "Should have error for empty second line");
         assertFalse(parser.success(), "Parser should not be successful");
     }
