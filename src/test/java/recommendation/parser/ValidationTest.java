@@ -207,18 +207,18 @@ public class ValidationTest {
     }
 
     //Incorrect userId uniqueness
-//    @Tag("unit-test")
-//    @Test
-//    public void validateInCorrectUserIdUniqueness() {
-//        List<User> users= new ArrayList<>();
-//        users.add(0,new User("Fady","001",new ArrayList<String>(){{add("drama");add("action");}}));
-//        users.add(1,new User("Ahmed","001",new ArrayList<String>(){{add("drama");add("action");}}));
-//
-//        ValidationException validationException = assertThrows(ValidationException.class,() -> {
-//            Validation.userIdUniquenessValidation(users);
-//        });
-//        assertEquals("ERROR: User Id {001} is wrong",validationException.getMessage());
-//    }
+    @Tag("unit-test")
+    @Test
+    public void validateInCorrectUserIdUniqueness() {
+        List<User> users= new ArrayList<>();
+        users.add(0,new User("Fady","001",new ArrayList<String>(){{add("drama");add("action");}}));
+        users.add(1,new User("Ahmed","001",new ArrayList<String>(){{add("drama");add("action");}}));
+
+        ValidationException validationException = assertThrows(ValidationException.class,() -> {
+            Validation.userIdUniquenessValidation(users);
+        });
+        assertEquals("ERROR: User Id {001} is repeated",validationException.getMessage());
+    }
 
     //correct movieId uniqueness
     @Tag("unit-test")
