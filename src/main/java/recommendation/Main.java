@@ -12,10 +12,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public Main(String userFile, String movieFile) throws IOException {
         Writer writer = new Writer();
         System.out.println("Movie Recommendation System starting...");
-        String movieFile = "samples/movies.txt";
         MovieParser movieParser = new MovieParser(movieFile);
         List<Movie> movies = movieParser.getMovies();
 
@@ -29,7 +28,6 @@ public class Main {
 
         System.out.println("Successfully loaded " + movies.size() + " movies");
 
-        String userFile = "samples/users.txt";
         UserParser userParser = new UserParser(userFile, movies);
         List<User> users = userParser.getUsers();
 
@@ -48,6 +46,19 @@ public class Main {
 
         writer.writeRecommendations(recommendations);
         System.out.println("Recommendations written to file successfully");
+    }
 
+    public static void main(String[] args) throws IOException {
+        String movieFile;
+        String userFile;
+        if (args.length >= 2) {
+            userFile = args[0];
+            movieFile = args[1];
+        } else {
+            movieFile = "samples/movies.txt";
+            userFile = "samples/users.txt";
+            System.out.println("No command line arguments provided. Using default sample files.");
+        }
+        new Main(userFile, movieFile);
     }
 }

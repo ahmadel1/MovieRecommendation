@@ -4,9 +4,3 @@ The Godfather, TG002
 Crime, Drama
 The Dark Knight, TDK003
 Action, Crime, Drama
-The Shesha, shesha1
-Action
-The pizza, shesha2
-Drama
-Film abc, shesha3
-Crime
