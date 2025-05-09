@@ -19,12 +19,12 @@ public class MovieParser {
     public MovieParser(String movieFile) {
         movies = new ArrayList<>();
 
-        if (movieFile == null) {
-            throw new IllegalArgumentException("File path cannot be null");
-        }
-
         try
         {
+            if (movieFile == null) {
+                throw new IllegalArgumentException("File path cannot be null");
+            }
+
             FileReader fileReader = new FileReader(movieFile);
             BufferedReader bufread = new BufferedReader(fileReader);
 
@@ -81,11 +81,12 @@ public class MovieParser {
         catch(NullPointerException e) {
             System.out.println("Exception: " +e);
             error = "Movies file is not formatted correctly";
-        } 
+        }
         catch(IllegalArgumentException e) {
             System.out.println("Exception: " +e);
             error = "Movies file is not formatted correctly";
-        } catch(FileNotFoundException e) {
+        }
+        catch(FileNotFoundException e) {
             System.out.println("Exception: " +e);
             error = "Movies file not found";
         }
@@ -108,14 +109,15 @@ public class MovieParser {
     public String getError() {
         return error;
     }
-    public void movieIdUniquenessValidation() throws ValidationException{
-        Set<String> uniqueMovieIds = new HashSet<>();
-        for(int i=0;i<movies.size();i++){
-            String numberInMovieId = movies.get(i).getMovieId().substring(movies.get(i).getMovieId().length()-3);
-            System.out.println("id: "+numberInMovieId);
-            if(!uniqueMovieIds.add(numberInMovieId)){
-                throw new ValidationException("ERROR: Movie Id numbers {"+numberInMovieId+"} aren’t unique");
-            }
-        }
-    }
+
+//    public void movieIdUniquenessValidation() throws ValidationException{
+//        Set<String> uniqueMovieIds = new HashSet<>();
+//        for(int i=0;i<movies.size();i++){
+//            String numberInMovieId = movies.get(i).getMovieId().substring(movies.get(i).getMovieId().length()-3);
+//            System.out.println("id: "+numberInMovieId);
+//            if(!uniqueMovieIds.add(numberInMovieId)){
+//                throw new ValidationException("ERROR: Movie Id numbers {"+numberInMovieId+"} aren’t unique");
+//            }
+//        }
+//    }
 }

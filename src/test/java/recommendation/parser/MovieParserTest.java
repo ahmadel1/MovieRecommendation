@@ -20,14 +20,14 @@ public class MovieParserTest {
     }
 
     // input is null
-    @Tag("unit-test")
-    @Test
-    public void parseNullParameter() {
-        String filePath = null;
-        assertThrows(IllegalArgumentException.class, () -> {
-            new MovieParser(filePath);
-        }, "Throw Illegal Argument Exception");
-    }
+//    @Tag("unit-test")
+//    @Test
+//    public void parseNullParameter() {
+//        String filePath = null;
+//        assertThrows(IllegalArgumentException.class, () -> {
+//            new MovieParser(filePath);
+//        }, "Throw Illegal Argument Exception");
+//    }
 
     // input file missing
     @Tag("unit-test")
@@ -129,12 +129,12 @@ public class MovieParserTest {
                    "Error message should include the invalid ID");
         
         // Test case 3: Empty ID
-        String filePath4 = "src/test/resources/movies/invalid_movie_id_empty.txt";
+        String filePath3 = "src/test/resources/movies/invalid_movie_id_empty.txt";
         String emptyId = "";
-        var parser4 = new MovieParser(filePath4);
-        assertNotNull(parser4.getError(), "Should have error for empty movie ID");
-        assertFalse(parser4.success(), "Parser should not be successful");
-        assertTrue(parser4.getError().contains(emptyId), "Error message should include the empty ID");
+        var parser3 = new MovieParser(filePath3);
+        assertNotNull(parser3.getError(), "Should have error for empty movie ID");
+        assertFalse(parser3.success(), "Parser should not be successful");
+        assertTrue(parser3.getError().contains(emptyId), "Error message should include the empty ID");
     }
     
     // movie id repeated
@@ -200,5 +200,13 @@ public class MovieParserTest {
             assertEquals(genres.size(), genres.stream().distinct().count(), 
                     "Movie should not have duplicate genres");
         });
+    }
+    @Tag("unit-test")
+    @Test
+    public void parseNullFilePath() {
+        String filePath = null;
+        var parser = new MovieParser(filePath);
+        assertFalse(parser.success(), "Movie Parser failed");
+        assertNotNull(parser.getError(), "Error parsing");
     }
 }
