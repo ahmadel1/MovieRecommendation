@@ -131,7 +131,7 @@ public class UserParserTest {
     public void parseInvalidUserId() {
         // Test case 1: Invalid format (missing letter at the end)
         String filePath1 = "src/test/resources/users/invalid_user_id.txt";
-        String invalidUserId1 = "123456789";
+        String invalidUserId1 = "1234567XY";
         var parser1 = new UserParser(filePath1, movies);
 //        assertEquals("ERROR: User Id {" + invalidUserId1 + "} is wrong",
 //                    parser1.getError(),

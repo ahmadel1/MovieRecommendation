@@ -128,21 +128,13 @@ public class MovieParserTest {
         assertTrue(parser2.getError().contains("TSR01"), 
                    "Error message should include the invalid ID");
         
-        // Test case 3: ID with non-unique numbers
-        String filePath3 = "src/test/resources/movies/invalid_movie_id_non_unique_numbers.txt";
-        String invalidId3 = "TSR111";  // Repeated number '1'
-        var parser3 = new MovieParser(filePath3);
-//        assertFalse(parser3.success(), "Parser should not be successful");
-//        assertTrue(parser3.getError().contains(invalidId3),
-//                   "Error message should include the invalid ID");
-        
-        // Test case 4: Empty ID
-        String filePath4 = "src/test/resources/movies/invalid_movie_id_empty.txt";
+        // Test case 3: Empty ID
+        String filePath3 = "src/test/resources/movies/invalid_movie_id_empty.txt";
         String emptyId = "";
-        var parser4 = new MovieParser(filePath4);
-        assertNotNull(parser4.getError(), "Should have error for empty movie ID");
-        assertFalse(parser4.success(), "Parser should not be successful");
-        assertTrue(parser4.getError().contains(emptyId), "Error message should include the empty ID");
+        var parser3 = new MovieParser(filePath3);
+        assertNotNull(parser3.getError(), "Should have error for empty movie ID");
+        assertFalse(parser3.success(), "Parser should not be successful");
+        assertTrue(parser3.getError().contains(emptyId), "Error message should include the empty ID");
     }
     
     // movie id repeated

@@ -48,8 +48,8 @@ public class UserParser {
                 var secondLine = bufread.readLine();
                 var parsedMovieIds = List.of(secondLine.split(", "));
 
-                if (parsedMovieIds.size() == 0) {
-                    throw new ValidationException("ERROR: Movie Ids for {"+uid+"} are wrong");
+                if (parsedMovieIds.get(0).isEmpty()) {
+                    throw new ValidationException("ERROR: Missing movie Ids for user {"+uname+"}");
                 }
                 // Use a HashSet to automatically remove duplicates
                 var movieIds = new ArrayList<String>();
