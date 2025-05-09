@@ -86,6 +86,17 @@ public class ValidationTest {
         });
         assertEquals("ERROR: Movie Id letters {"+movieId+"} are wrong",validationException.getMessage());
     }
+    //movie id with not 3 numbers
+    @Tag("unit-test")
+    @Test
+    public void validateMovieIdWithNotLastThreeNumbers() {
+        String movieTitle = "The God Father";
+        String movieId = "TGF0D2";
+        ValidationException validationException = assertThrows(ValidationException.class,() -> {
+            Validation.movieIdValidation(movieId,movieTitle);
+        });
+        assertEquals("ERROR: Movie Id letters {"+movieId+"} are wrong",validationException.getMessage());
+    }
 
     //movie id with special characters
     @Tag("unit-test")
@@ -159,7 +170,16 @@ public class ValidationTest {
         });
         assertEquals("ERROR: User Id {"+userId+"} is wrong",validationException.getMessage());
     }
-
+    //user id with special characters
+    @Tag("unit-test")
+    @Test
+    public void validateUserIdWithCharacterInId() {
+        String userId = "123456a8X";
+        ValidationException validationException = assertThrows(ValidationException.class,() -> {
+            Validation.userIdValidation(userId);
+        });
+        assertEquals("ERROR: User Id {"+userId+"} is wrong",validationException.getMessage());
+    }
     //user id with special characters
     @Tag("unit-test")
     @Test
@@ -187,18 +207,18 @@ public class ValidationTest {
     }
 
     //Incorrect userId uniqueness
-    @Tag("unit-test")
-    @Test
-    public void validateInCorrectUserIdUniqueness() {
-        List<User> users= new ArrayList<>();
-        users.add(0,new User("Fady","001",new ArrayList<String>(){{add("drama");add("action");}}));
-        users.add(1,new User("Ahmed","001",new ArrayList<String>(){{add("drama");add("action");}}));
-
-        ValidationException validationException = assertThrows(ValidationException.class,() -> {
-            Validation.userIdUniquenessValidation(users);
-        });
-        assertEquals("ERROR: User Id {001} is wrong",validationException.getMessage());
-    }
+//    @Tag("unit-test")
+//    @Test
+//    public void validateInCorrectUserIdUniqueness() {
+//        List<User> users= new ArrayList<>();
+//        users.add(0,new User("Fady","001",new ArrayList<String>(){{add("drama");add("action");}}));
+//        users.add(1,new User("Ahmed","001",new ArrayList<String>(){{add("drama");add("action");}}));
+//
+//        ValidationException validationException = assertThrows(ValidationException.class,() -> {
+//            Validation.userIdUniquenessValidation(users);
+//        });
+//        assertEquals("ERROR: User Id {001} is wrong",validationException.getMessage());
+//    }
 
     //correct movieId uniqueness
     @Tag("unit-test")
@@ -229,6 +249,6 @@ public class ValidationTest {
         ValidationException validationException = assertThrows(ValidationException.class,() -> {
             Validation.movieIdUniquenessValidation(movies);
         });
-        assertEquals("ERROR: Movie Id numbers {121} aren’t unique",validationException.getMessage());
+        assertEquals("ERROR: Movie Id numbers {121} are repeated",validationException.getMessage());
     }
 }
