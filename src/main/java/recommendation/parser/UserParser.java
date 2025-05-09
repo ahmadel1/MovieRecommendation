@@ -118,12 +118,12 @@ public class UserParser {
         return error;
     }
 
-    public void userIdUniquenessValidation() throws ValidationException{
-        Set<String> uniqueUserIds = new HashSet<>();
-        for(int i=0;i<users.size();i++){
-            if(!uniqueUserIds.add(users.get(i).getUserId())){
-                throw new ValidationException("ERROR: User Id {"+users.get(i).getUserId()+"} is wrong");
-            }
-        }
-    }
+//    public void userIdUniquenessValidation() throws ValidationException{
+//        Set<String> uniqueUserIds = new HashSet<>();
+//        for(int i=0;i<users.size();i++){
+//            if(!uniqueUserIds.add(users.get(i).getUserId())){
+//                throw new ValidationException("ERROR: User Id {"+users.get(i).getUserId()+"} is wrong");
+//            }
+//        }
+//    }
 }
