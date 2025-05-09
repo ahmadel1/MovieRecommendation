@@ -23,7 +23,7 @@ public class Main {
             String error = movieParser.getError();
             System.out.println("Parsing error: " + error);
             writer.writeError(error);
-            System.exit(0);
+            return;
         }
 
         System.out.println("Successfully loaded " + movies.size() + " movies");
@@ -36,7 +36,7 @@ public class Main {
             String error = userParser.getError();
             System.out.println("Parsing Error: " + error);
             writer.writeError(error);
-            System.exit(0);
+            return;
         }
         System.out.println("Successfully loaded " + users.size() + " users");
 
