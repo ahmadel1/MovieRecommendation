@@ -29,9 +29,9 @@ public class RecommendationIntegrationTest {
 
     @BeforeAll
     public static void init() {
-        String moviePath = RecommendationIntegrationTest.class.getResource("/movies/valid_movies.txt").getFile();
+        String moviePath = "src/test/resources/movies/valid_movies.txt";
         movieParser = new MovieParser(moviePath);
-        String userPath = RecommendationIntegrationTest.class.getResource("/users/valid_users.txt").getFile();
+        String userPath = "src/test/resources/users/valid_users.txt";
         userParser = new UserParser(userPath, movieParser.getMovies());
         recommendationSystem = new RecommendationSystem(userParser.getUsers(), movieParser.getMovies());
     }
@@ -54,7 +54,7 @@ public class RecommendationIntegrationTest {
 
     @Test
     public void testMovieParserWithInvalidGenres() {
-        String path = getClass().getResource("/movies/invalid_movie_genres.txt").getFile();
+        String path = "src/test/resources/movies/invalid_movie_genres.txt";
         MovieParser parser = new MovieParser(path);
         assertFalse(parser.success());
         assertTrue(parser.getError().contains("Movie Genre"));
@@ -63,7 +63,7 @@ public class RecommendationIntegrationTest {
 
     @Test
     public void testMalformedMovieFile() {
-        String path = getClass().getResource("/movies/malformed_commas.txt").getFile();
+        String path = "src/test/resources/movies/malformed_commas.txt";
         MovieParser parser = new MovieParser(path);
         assertFalse(parser.success());
         assertTrue(parser.getError().contains("not formatted correctly"));
@@ -72,9 +72,9 @@ public class RecommendationIntegrationTest {
 
     @Test
     public void testUserParserWithInvalidMovieReference() {
-        MovieParser mp = new MovieParser(getClass().getResource("/movies/valid_movies.txt").getFile());
+        MovieParser mp = new MovieParser("src/test/resources/movies/valid_movies.txt");
         UserParser up = new UserParser(
-                getClass().getResource("/users/non_existent_movie_ids.txt").getFile(),
+                "src/test/resources/users/non_existent_movie_ids.txt",
                 mp.getMovies()
         );
         assertFalse(up.success());
@@ -84,9 +84,9 @@ public class RecommendationIntegrationTest {
 
     @Test
     public void testUserParserDataDeduplication() {
-        MovieParser mp = new MovieParser(getClass().getResource("/movies/valid_movies.txt").getFile());
+        MovieParser mp = new MovieParser("src/test/resources/movies/valid_movies.txt");
         UserParser up = new UserParser(
-                getClass().getResource("/users/repeated_movie_ids.txt").getFile(),
+                "src/test/resources/users/repeated_movie_ids.txt",
                 mp.getMovies()
         );
         assertTrue(up.success());
@@ -133,9 +133,9 @@ public class RecommendationIntegrationTest {
 
     @Test
     public void testMalformedUserFile() {
-        MovieParser mp = new MovieParser(getClass().getResource("/movies/valid_movies.txt").getFile());
+        MovieParser mp = new MovieParser("src/test/resources/movies/valid_movies.txt");
         UserParser up = new UserParser(
-                getClass().getResource("/users/malformed_commas.txt").getFile(),
+                "src/test/resources/users/malformed_commas.txt",
                 mp.getMovies()
         );
         assertFalse(up.success());
